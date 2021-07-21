@@ -142,9 +142,9 @@ end;
 
 
 
-// addComent: Adds a comment based on the input ItemID and the CommentString
+// addComment: Adds a comment based on the input ItemID and the CommentString
 // Returns 0 on success, returns -1 on failure
-function addComent(ItemID: LongWord; commentString: string): integer ;stdcall; export;
+function addComment(ItemID: LongWord; commentString: string): integer ;stdcall; export;
 const
   BufLen=500;    // Needs to be long to ensure everything is captured, the comments with duplicate custodians can run to very long
 var
@@ -236,11 +236,11 @@ begin
         if (XWF_GetItemInformation(nItemID, XWF_ITEM_INFO_FLAGS, @hasComment) and $2000) = 0 then
         begin
           strDuplicateComment :=  'Duplicate Custodians (MD5 Hash): ' + strArray[3] ;
-          addComent(nItemID, strDuplicateComment) // add this as a seperate line to ensure that it is added on a new line
+          addComment(nItemID, strDuplicateComment) // add this as a seperate line to ensure that it is added on a new line
         end;
 
       strItemComment := 'Relativity ID: ' + strArray[1] + '. Nuix GUID: '  +  strArray[2];
-      addComent(nItemID, strItemComment);
+      addComment(nItemID, strItemComment);
 
       result := 1;
       end;
